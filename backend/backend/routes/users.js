@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const validator = require("validator");
+const config = require("../config/config");
 
 const User = mongoose.model("User");
 
@@ -73,31 +74,31 @@ router.post("/login", (req, res, next) => {
         .then(user => {
             if (!user) {
                 return res.status(401).json({
-                    message: "Auth failed1"
+                    message: "Auth failed. User does not exist"
                 });
             }
             bcrypt.compare(req.body.password, user.password, (err, result) => {
                 if (err) {
                     return res.status(500).json({
-                        message: "Auth failed2"
+                        message: "Auth failed"
                     });
                 } else {
                     if (result === false) {
                         return res.status(401).json({
-                            message: "Auth failed3"
+                            message: "Auth failed"
                         });
                     } else {
                         const token = jwt.sign(
                             {
                                 userId: user._id
                             },
-                            "JWT_KEY", //process.env.JWT_KEY,
+                            config.JWT_KEY, //process.env.JWT_KEY,
                             {
                                 expiresIn: "1d"
                             }
                         );
-                        userInfo = {
-                            _id: user._id,
+                        const userInfo = {
+                            id: user._id,
                             email: user.email
                         };
                         return res.status(200).json({
