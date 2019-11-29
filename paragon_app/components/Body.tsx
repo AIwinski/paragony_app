@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Button, View, Text } from 'react-native';
+import { NonLoggedView } from './bodyComponents/NonLoggedView';
 
 //enum loginStateE = {Login, Register, None};
 
@@ -8,20 +9,16 @@ export class Body extends Component {
         loginState: "None",
         };
 
+    constructor(props) {
+        super(props);
+    }
+
     render() {
-        let body;
         if(!this.state.logged)
         {
             if(this.state.loginState==="None")
             {
-                return( <View style={styles.bodyView}>
-                            <View style={styles.buttomView}>
-                                <Button title="Login"/>
-                            </View>
-                            <View style={styles.buttomView}>
-                                <Button title="Register"/>
-                            </View>
-                        </View>);
+                return( <NonLoggedView/> );
             }
             else if(this.state.loginState==="Login")
             {
