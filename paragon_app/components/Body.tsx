@@ -13,12 +13,19 @@ export class Body extends Component {
         super(props);
     }
 
+    setLoginState(lState)
+    {
+        this.setState({
+            loginState: lState
+        })
+    }
+
     render() {
         if(!this.state.logged)
         {
             if(this.state.loginState==="None")
             {
-                return( <NonLoggedView/> );
+                return( <NonLoggedView loginStateHandle={this.setLoginState.bind(this)}/> );
             }
             else if(this.state.loginState==="Login")
             {

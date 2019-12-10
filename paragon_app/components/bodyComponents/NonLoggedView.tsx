@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { StyleSheet, Button, View } from 'react-native';
 
 export class NonLoggedView extends Component {
+
   render() {
     return (
         <View style={styles.bodyView}>
             <View style={styles.buttomView}>
-                <Button title="Login"/>
+                <Button title="Login" onPress={() => this.props.loginStateHandle("Login")}/>
             </View>
             <View style={styles.buttomView}>
-                <Button title="Register"/>
+                <Button title="Register" onPress={() => this.props.loginStateHandle("Register")}/>
             </View>
         </View>
     );
