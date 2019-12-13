@@ -42,7 +42,7 @@ export class Body extends Component {
                 );
             }
             return (
-                <Text>Error: </Text>
+                <Text>Error: Unknown State</Text>
             );
         }
         else
