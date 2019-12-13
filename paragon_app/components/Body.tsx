@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Button, View, Text } from 'react-native';
 import { NonLoggedView } from './bodyComponents/NonLoggedView';
+import { LoginView } from './bodyComponents/LoginView';
+import { RegisterView } from './bodyComponents/RegisterView';
 
 //enum loginStateE = {Login, Register, None};
 
@@ -30,15 +32,18 @@ export class Body extends Component {
             else if(this.state.loginState==="Login")
             {
                 return (
-                    <Text>Developing...</Text>
+                    <LoginView/>
                 );
             }
             else if(this.state.loginState==="Register")
             {
                 return (
-                    <Text>Developing...</Text>
+                    <RegisterView/>
                 );
             }
+            return (
+                <Text>Error: </Text>
+            );
         }
         else
         {
@@ -46,24 +51,5 @@ export class Body extends Component {
                 <Text>Logged</Text>
             );
         }
-        return (
-            <Text>error</Text>
-        );
     }
 }
-
-const styles = StyleSheet.create({
-    bodyView:{
-        borderRadius: 20,
-        paddingTop: 50,
-        paddingBottom: 10,
-        paddingLeft: 10,
-        paddingRight: 10
-      },
-    buttomView: {
-        paddingTop: 5,
-        paddingBottom: 5,
-        paddingLeft: 10,
-        paddingRight: 10
-      }
-});
