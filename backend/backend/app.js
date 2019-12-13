@@ -9,6 +9,7 @@ const path = require("path");
 const User = require("./models/User");
 
 const userRoutes = require("./routes/users");
+const receiptRoutes = require("./routes/receipts");
 
 app.use(bodyParser.json({ limit: "4mb" }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -30,6 +31,7 @@ app.get("/", (req, res, next) => {
 });
 
 app.use("/users", userRoutes);
+app.use("/receipts", receiptRoutes);
 
 const port = process.env.PORT || 4000;
 
