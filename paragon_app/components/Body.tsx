@@ -3,13 +3,14 @@ import { StyleSheet, Button, View, Text } from 'react-native';
 import { NonLoggedView } from './bodyComponents/NonLoggedView';
 import { LoginView } from './bodyComponents/LoginView';
 import { RegisterView } from './bodyComponents/RegisterView';
+import { LoggedView } from './bodyComponents/LoggedView';
 
-//enum loginStateE = {Login, Register, None};
+//enum loginStateE {Login, Register, None};
 
 export class Body extends Component {
     state = { logged: false,
         loginState: "None",
-        };
+    };
 
     constructor(props) {
         super(props);
@@ -22,6 +23,13 @@ export class Body extends Component {
         })
     }
 
+    logUser()
+    {
+        this.setState({
+            logged: true
+        });
+    }
+
     render() {
         if(!this.state.logged)
         {
@@ -32,7 +40,7 @@ export class Body extends Component {
             else if(this.state.loginState==="Login")
             {
                 return (
-                    <LoginView/>
+                    <LoginView logUserHandle={this.logUser.bind(this)}/>
                 );
             }
             else if(this.state.loginState==="Register")
@@ -48,7 +56,7 @@ export class Body extends Component {
         else
         {
             return (
-                <Text>Logged</Text>
+                <LoggedView cameraHandle={this.props.cameraHandle.bind(this)}/>
             );
         }
     }

@@ -4,7 +4,7 @@ import { StyleSheet, Button, View, TextInput } from 'react-native';
 export class LoginView extends Component {
 
   submitAction() {
-
+    this.props.logUserHandle();
   }
 
   render() {

@@ -2,18 +2,37 @@ import React, { Component } from 'react';
 import { StyleSheet, View} from 'react-native';
 import {Header} from './components/Header';
 import {Body} from './components/Body';
+import {CameraView} from './components/CameraView';
 
 export default class App extends Component {
-  
+  state = {
+    openCamera: false
+  }
+
+  openCamera()
+  {
+    this.setState({
+      openCamera: true
+    });
+  }
 
   render() {
     //console.log("aplikacja uruchomiona");
-    return (
-      <View style={styles.container}>
-        <Header />
-        <Body />
-      </View>
-    );
+    if(!this.state.openCamera)
+    {
+      return (
+        <View style={styles.container}>
+          <Header />
+          <Body cameraHandle={this.openCamera.bind(this)}/>
+        </View>
+      );
+    }
+    else
+    {
+      return(
+        <CameraView/>
+      )
+    }
   }
   
 }
