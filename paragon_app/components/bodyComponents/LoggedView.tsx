@@ -5,7 +5,7 @@ import { Camera } from 'expo-camera';
 export class LoggedView extends Component {
     addParagon() {
         console.log("add paragon");
-        this.props.cameraHandle();
+        this.props.cameraSwitch(true);
     }
 
     async componentDidMount()

@@ -6,13 +6,30 @@ import {CameraView} from './components/CameraView';
 
 export default class App extends Component {
   state = {
-    openCamera: false
+    openCamera: false,
+    logged: false,
+    loginState: "None",
   }
 
-  openCamera()
+  cameraSwitch(state)
   {
     this.setState({
-      openCamera: true
+      openCamera: state
+    });
+  }
+
+  loggedSwitch(state: boolean)
+  {
+    this.setState({
+      logged: state
+    });
+  }
+
+  loginStateSwitch(state)
+  {
+    console.log(state);
+    this.setState({
+      loginState: state
     });
   }
 
@@ -23,14 +40,18 @@ export default class App extends Component {
       return (
         <View style={styles.container}>
           <Header />
-          <Body cameraHandle={this.openCamera.bind(this)}/>
+          <Body cameraSwitch={this.cameraSwitch.bind(this)}
+            loggedSwitch={this.loggedSwitch.bind(this)}
+            loginStateSwitch={this.loginStateSwitch.bind(this)}
+            logged={this.state.logged}
+            loginState={this.state.loginState}/>
         </View>
       );
     }
     else
     {
       return(
-        <CameraView/>
+        <CameraView cameraSwitch={this.cameraSwitch.bind(this)}/>
       )
     }
   }

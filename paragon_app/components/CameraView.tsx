@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity} from 'react-native';
 import { Camera } from 'expo-camera';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, AntDesign } from '@expo/vector-icons';
 
 export class CameraView extends Component
 {
@@ -20,16 +20,26 @@ export class CameraView extends Component
 		console.log(picture.uri);
 	}
 
+	exitCameraView()
+	{
+		this.props.cameraSwitch(false);
+	}
+
 	render()
 	{
 		return (
 			<View style={styles.cameraContainer}>
-				<Camera style={styles.camera} 
-					ref={(cam) => { this.camera = cam; }}>
+				<Camera style={styles.camera} ref={(cam) => { this.camera = cam; }}>
 					<View style={styles.cameraView}>
-						<TouchableOpacity onPress={() => this.shootPicture()}>
-							<FontAwesome name="camera" style={{ color: "#fff", fontSize: 40}}/>
-						</TouchableOpacity>
+						<View style={styles.buttonRow}>
+							<TouchableOpacity onPress={() => this.exitCameraView()}>
+								<AntDesign name="back" style={styles.iconButton}/>
+							</TouchableOpacity>
+							<TouchableOpacity onPress={() => this.shootPicture()}>
+								<FontAwesome name="camera" style={styles.iconButton}/>
+							</TouchableOpacity>
+						</View>
+						<View style={{flex: 0.9}}></View>
 					</View>
 				</Camera>
 			</View>
@@ -49,5 +59,17 @@ const styles = StyleSheet.create({
 		backgroundColor: 'transparent',
 		flexDirection: 'column-reverse',
 		alignItems: 'center',
+	},
+	buttonRow: {
+		flex: 0.1,
+		flexDirection: 'row',
+		justifyContent: 'space-between'
+	},
+	iconButton: {
+		color: "#fff",
+		fontSize: 40,
+		paddingLeft: 20,
+		paddingRight: 20,
+		paddingBottom: 20
 	}
 });

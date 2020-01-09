@@ -8,42 +8,30 @@ import { LoggedView } from './bodyComponents/LoggedView';
 //enum loginStateE {Login, Register, None};
 
 export class Body extends Component {
-    state = { logged: false,
-        loginState: "None",
-    };
 
     constructor(props) {
         super(props);
     }
 
-    setLoginState(lState)
-    {
-        this.setState({
-            loginState: lState
-        })
-    }
-
     logUser()
     {
-        this.setState({
-            logged: true
-        });
+        this.props.loggedSwitch(true);
     }
 
     render() {
-        if(!this.state.logged)
+        if(!this.props.logged)
         {
-            if(this.state.loginState==="None")
+            if(this.props.loginState==="None")
             {
-                return( <NonLoggedView loginStateHandle={this.setLoginState.bind(this)}/> );
+                return( <NonLoggedView loginStateHandle={this.props.loginStateSwitch.bind(this)}/> );
             }
-            else if(this.state.loginState==="Login")
+            else if(this.props.loginState==="Login")
             {
                 return (
                     <LoginView logUserHandle={this.logUser.bind(this)}/>
                 );
             }
-            else if(this.state.loginState==="Register")
+            else if(this.props.loginState==="Register")
             {
                 return (
                     <RegisterView/>
@@ -56,7 +44,7 @@ export class Body extends Component {
         else
         {
             return (
-                <LoggedView cameraHandle={this.props.cameraHandle.bind(this)}/>
+                <LoggedView cameraSwitch={this.props.cameraSwitch.bind(this)}/>
             );
         }
     }
