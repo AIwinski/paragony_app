@@ -6,24 +6,45 @@ export class RegisterView extends Component {
   state = {
     email: null,
     password: null,
-    rpassword: null
+    rpassword: null,
+
+    wrongEmail: false,
+    wrongPassword: false
   }
 
   emailChange(text) {
     this.setState({email: text});
+    //if()
+  }
+
+  passwordChange(text) {
+    this.setState({password: text});
+  }
+
+  rpasswordChange(text) {
+    this.setState({rpassword: text});
+  }
+
+  validStyle(valid: boolean)
+  {
+    if(valid)
+      return(s.textInput);
+    else
+      return(s.textInputInvalid);
   }
 
   submitAction() {
-    
   }
 
   render() {
     return (
         <View style={s.bodyView}>
-          <TextInput style={s.textInput} placeholder="Email"
+          <TextInput style={this.validStyle(!this.state.wrongEmail)} placeholder="Email"
             onChangeText={(text) => this.emailChange(text)}/>
-          <TextInput style={s.textInput} placeholder="Password"/>
-          <TextInput style={s.textInput} placeholder="Repeat Password"/>
+          <TextInput style={this.validStyle(!this.state.wrongPassword)} placeholder="Password"
+            onChangeText={(text) => this.passwordChange(text)}/>
+          <TextInput style={this.validStyle(!this.state.wrongPassword)} placeholder="Repeat Password"
+            onChangeText={(text) => this.rpasswordChange(text)}/>
           <View style={s.buttonRow}>
             <View style={s.buttonView}>
               <Button onPress={() => this.props.loginStateSwitch("Login")} title="Return to Login"/>

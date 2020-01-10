@@ -26,6 +26,13 @@ module.exports = StyleSheet.create({
         padding: 5,
         margin: 5,
     },
+    textInputInvalid: {
+        backgroundColor: "pink",
+        borderColor: "black",
+        borderWidth: 1,
+        padding: 5,
+        margin: 5,
+    },
     buttonRow: {
         flexDirection: 'row',
 		justifyContent: 'space-between',
