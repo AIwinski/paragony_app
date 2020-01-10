@@ -3,18 +3,22 @@ import { StyleSheet, View} from 'react-native';
 import {Header} from './components/Header';
 import {Body} from './components/Body';
 import {CameraView} from './components/CameraView';
+import {InsertView} from './components/InsertView';
 
 export default class App extends Component {
   state = {
-    openCamera: false,
+    camera: "Close",//{Close, ShootPicture, Insert}
     logged: false,
-    loginState: "None",
+    loginState: "None",//{Login, Register, None}
+
   }
+
+  takenPictureUri = null;
 
   cameraSwitch(state)
   {
     this.setState({
-      openCamera: state
+      camera: state
     });
   }
 
@@ -33,9 +37,14 @@ export default class App extends Component {
     });
   }
 
+  savePicture(uri)
+  {
+    this.takenPictureUri = uri;
+  }
+
   render() {
     //console.log("aplikacja uruchomiona");
-    if(!this.state.openCamera)
+    if(this.state.camera==="Close")
     {
       return (
         <View style={styles.container}>
@@ -48,11 +57,18 @@ export default class App extends Component {
         </View>
       );
     }
-    else
+    else if(this.state.camera==="ShootPicture")
     {
       return(
-        <CameraView cameraSwitch={this.cameraSwitch.bind(this)}/>
-      )
+        <CameraView cameraSwitch={this.cameraSwitch.bind(this)}
+        savePicture={this.savePicture.bind(this)}/>
+      );
+    }
+    else if(this.state.camera==="Insert")
+    {
+      return(
+        <InsertView picture={this.takenPictureUri} cameraSwitch={this.cameraSwitch.bind(this)}/>
+      );
     }
   }
   

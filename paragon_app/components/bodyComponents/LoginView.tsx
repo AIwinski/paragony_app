@@ -11,7 +11,7 @@ export class LoginView extends Component {
     return (
         <View style={s.bodyView}>
           <TextInput style={s.textInput} placeholder="nickname"/>
-          <TextInput style={s.textInput} placeholder="Password"/>
+          <TextInput style={s.textInput} placeholder="password"/>
           <Button onPress={() => this.submitAction()} title="login"/>
         </View>
     );

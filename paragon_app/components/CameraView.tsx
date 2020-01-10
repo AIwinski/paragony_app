@@ -10,7 +10,6 @@ export class CameraView extends Component
 	async shootPicture()
 	{
 		console.log("shooted");
-		//let picture = await Camera.takePictureAsync();
 		let cameraOptions = {
 			quality: 1,
 			base64: false,
@@ -18,11 +17,13 @@ export class CameraView extends Component
 		};
 		let picture = await this.camera.takePictureAsync(cameraOptions);
 		console.log(picture.uri);
+		this.props.savePicture(picture);
+		this.props.cameraSwitch("Insert");
 	}
 
 	exitCameraView()
 	{
-		this.props.cameraSwitch(false);
+		this.props.cameraSwitch("Close");
 	}
 
 	render()
@@ -48,7 +49,7 @@ export class CameraView extends Component
 }
 
 const styles = StyleSheet.create({
-  cameraContainer: {
+	cameraContainer: {
 		flex: 1
 	},
 	camera: {
