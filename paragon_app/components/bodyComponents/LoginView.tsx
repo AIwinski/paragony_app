@@ -12,7 +12,14 @@ export class LoginView extends Component {
         <View style={s.bodyView}>
           <TextInput style={s.textInput} placeholder="nickname"/>
           <TextInput style={s.textInput} placeholder="password"/>
-          <Button onPress={() => this.submitAction()} title="login"/>
+          <View style={s.buttonRow}>
+            <View style={s.buttonView}>
+              <Button onPress={() => this.props.loginStateSwitch("Register")} title="Return to Register"/>
+            </View>
+            <View style={s.buttonView}>
+              <Button onPress={() => this.submitAction()} title="login"/>
+            </View>
+            </View>
         </View>
     );
   }

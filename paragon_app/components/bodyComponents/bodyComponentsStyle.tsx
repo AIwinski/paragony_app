@@ -25,6 +25,12 @@ module.exports = StyleSheet.create({
         borderWidth: 1,
         padding: 5,
         margin: 5,
+    },
+    buttonRow: {
+        flexDirection: 'row',
+		justifyContent: 'space-between',
+    },
+    buttonView: {
+        margin: 5,
     }
-
 });

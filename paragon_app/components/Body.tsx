@@ -28,13 +28,13 @@ export class Body extends Component {
             else if(this.props.loginState==="Login")
             {
                 return (
-                    <LoginView logUserHandle={this.logUser.bind(this)}/>
+                    <LoginView loginStateSwitch={this.props.loginStateSwitch.bind(this)} logUserHandle={this.logUser.bind(this)}/>
                 );
             }
             else if(this.props.loginState==="Register")
             {
                 return (
-                    <RegisterView/>
+                    <RegisterView loginStateSwitch={this.props.loginStateSwitch.bind(this)}/>
                 );
             }
             return (
