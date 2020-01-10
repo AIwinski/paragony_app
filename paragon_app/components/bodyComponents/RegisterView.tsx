@@ -4,9 +4,9 @@ import { StyleSheet, Button, View, TextInput } from 'react-native';
 export class RegisterView extends Component {
 
   state = {
-    email: null,
-    password: null,
-    rpassword: null,
+    email: "",
+    password: "",
+    rpassword: "",
 
     wrongEmail: false,
     wrongPassword: false
@@ -14,15 +14,35 @@ export class RegisterView extends Component {
 
   emailChange(text) {
     this.setState({email: text});
-    //if()
+    let em = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
+    if(em.test(text) && this.state.wrongEmail || text.length === 0)
+    {
+      this.setState({wrongEmail: false});
+    }
+    else if(!em.test(text) && !this.state.wrongEmail)
+    {
+      this.setState({wrongEmail: true});
+    }
   }
 
   passwordChange(text) {
     this.setState({password: text});
+    if(text.length > 8 && text === this.state.rpassword && this.state.wrongPassword || (text.length === 0 && this.state.rpassword.length === 0))
+      this.setState({wrongPassword: false});
+    else if(text.length < 8 || text !== this.state.rpassword && !this.state.wrongPassword)
+    {
+      this.setState({wrongPassword: true});
+    }
   }
 
   rpasswordChange(text) {
     this.setState({rpassword: text});
+    if(text.length > 8 && text === this.state.password && this.state.wrongPassword || (text.length === 0 && this.state.password.length === 0))
+      this.setState({wrongPassword: false});
+    else if(text.length < 8 || text !== this.state.password && !this.state.wrongPassword)
+    {
+      this.setState({wrongPassword: true});
+    }
   }
 
   validStyle(valid: boolean)
@@ -42,15 +62,19 @@ export class RegisterView extends Component {
           <TextInput style={this.validStyle(!this.state.wrongEmail)} placeholder="Email"
             onChangeText={(text) => this.emailChange(text)}/>
           <TextInput style={this.validStyle(!this.state.wrongPassword)} placeholder="Password"
-            onChangeText={(text) => this.passwordChange(text)}/>
+            onChangeText={(text) => this.passwordChange(text)}
+            secureTextEntry={true}/>
           <TextInput style={this.validStyle(!this.state.wrongPassword)} placeholder="Repeat Password"
-            onChangeText={(text) => this.rpasswordChange(text)}/>
+            onChangeText={(text) => this.rpasswordChange(text)}
+            secureTextEntry={true}/>
           <View style={s.buttonRow}>
             <View style={s.buttonView}>
               <Button onPress={() => this.props.loginStateSwitch("Login")} title="Return to Login"/>
             </View>
             <View style={s.buttonView}>
-              <Button onPress={() => this.submitAction()} title="Register"/>
+              <Button onPress={() => this.submitAction()} title="Register"
+                disabled={this.state.wrongEmail || this.state.wrongPassword
+                || this.state.email.length === 0 || this.state.password.length === 0 }/>
             </View>
           </View>
         </View>
