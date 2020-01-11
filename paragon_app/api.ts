@@ -1,5 +1,5 @@
 
-import AsyncStorage from '@react-native-community/async-storage';
+import { AsyncStorage } from 'react-native';;
 
 const API_URL = 'https://dashboard.heroku.com/apps/stormy-shelf-85819';
 
@@ -40,6 +40,7 @@ export const login = (email: string, password: string) => {
 
 export const register = (email: string, password: string) => {
     fetch(API_URL + '/users/register', { method: 'POST', body: JSON.stringify({ email, password }) }).then(response => {
+        console.log(response.headers);
         return response.json();
     });
 };

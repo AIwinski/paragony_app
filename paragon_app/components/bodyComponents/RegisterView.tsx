@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Button, View, TextInput } from 'react-native';
+import { register } from '../../api'
 
 export class RegisterView extends Component {
 
@@ -27,9 +28,9 @@ export class RegisterView extends Component {
 
   passwordChange(text) {
     this.setState({password: text});
-    if(text.length > 8 && text === this.state.rpassword && this.state.wrongPassword || (text.length === 0 && this.state.rpassword.length === 0))
+    if(text.length > 7 && text === this.state.rpassword && this.state.wrongPassword || (text.length === 0 && this.state.rpassword.length === 0))
       this.setState({wrongPassword: false});
-    else if(text.length < 8 || text !== this.state.rpassword && !this.state.wrongPassword)
+    else if(text.length < 7 || text !== this.state.rpassword && !this.state.wrongPassword)
     {
       this.setState({wrongPassword: true});
     }
@@ -37,9 +38,9 @@ export class RegisterView extends Component {
 
   rpasswordChange(text) {
     this.setState({rpassword: text});
-    if(text.length > 8 && text === this.state.password && this.state.wrongPassword || (text.length === 0 && this.state.password.length === 0))
+    if(text.length > 7 && text === this.state.password && this.state.wrongPassword || (text.length === 0 && this.state.password.length === 0))
       this.setState({wrongPassword: false});
-    else if(text.length < 8 || text !== this.state.password && !this.state.wrongPassword)
+    else if(text.length < 7 || text !== this.state.password && !this.state.wrongPassword)
     {
       this.setState({wrongPassword: true});
     }
@@ -54,6 +55,10 @@ export class RegisterView extends Component {
   }
 
   submitAction() {
+    console.log(this.state.email);
+    console.log(this.state.password);
+    let response = register(this.state.email, this.state.password);
+    console.log(response);
   }
 
   render() {
