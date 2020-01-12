@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Button, View, TextInput } from 'react-native';
+import { login } from '../../api'
 
 export class LoginView extends Component {
 
@@ -10,7 +11,7 @@ export class LoginView extends Component {
   render() {
     return (
         <View style={s.bodyView}>
-          <TextInput style={s.textInput} placeholder="nickname"/>
+          <TextInput style={s.textInput} placeholder="email"/>
           <TextInput style={s.textInput} placeholder="password"/>
           <View style={s.buttonRow}>
             <View style={s.buttonView}>
@@ -19,7 +20,7 @@ export class LoginView extends Component {
             <View style={s.buttonView}>
               <Button onPress={() => this.submitAction()} title="login"/>
             </View>
-            </View>
+          </View>
         </View>
     );
   }

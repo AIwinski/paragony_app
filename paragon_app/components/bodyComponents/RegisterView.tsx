@@ -66,7 +66,7 @@ export class RegisterView extends Component {
         <View style={s.bodyView}>
           <TextInput style={this.validStyle(!this.state.wrongEmail)} placeholder="Email"
             onChangeText={(text) => this.emailChange(text)}/>
-          <TextInput style={this.validStyle(!this.state.wrongPassword)} placeholder="Password"
+          <TextInput style={this.validStyle(!this.state.wrongPassword)} placeholder="Password (min. 8 characters)"
             onChangeText={(text) => this.passwordChange(text)}
             secureTextEntry={true}/>
           <TextInput style={this.validStyle(!this.state.wrongPassword)} placeholder="Repeat Password"

@@ -1,7 +1,7 @@
 
 import { AsyncStorage } from 'react-native';;
 
-const API_URL = 'https://dashboard.heroku.com/apps/stormy-shelf-85819';
+const API_URL = 'https://stormy-shelf-85819.herokuapp.com';
 
 const storeToken = async (token: string) => {
     try {
