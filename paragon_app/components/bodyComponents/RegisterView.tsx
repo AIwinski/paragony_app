@@ -58,7 +58,19 @@ export class RegisterView extends Component {
     console.log(this.state.email);
     console.log(this.state.password);
     let response = await register(this.state.email, this.state.password);
-    console.log(response);
+    if( response.user.email === this.state.email )
+    {
+      this.props.logUserHandle();
+      this.props.showInfoMessage("Succesfully registered");
+    }
+    else
+    {
+      if(typeof response.message === 'string')
+        this.props.showInfoMessage(response.message);
+      else
+        this.props.showInfoMessage("Something went wrong");
+      console.log(response);
+    }
   }
 
   render() {

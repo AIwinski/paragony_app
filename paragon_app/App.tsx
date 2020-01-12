@@ -10,7 +10,9 @@ export default class App extends Component {
     camera: "Close",//{Close, ShootPicture, Insert}
     logged: false,
     loginState: "None",//{Login, Register, None}
-
+    
+    showInfo: false,
+    infoMessage: "",
   }
 
   takenPictureUri = null;
@@ -42,6 +44,21 @@ export default class App extends Component {
     this.takenPictureUri = uri;
   }
 
+  showInfoMessage(message)
+  {
+    this.setState({
+      showInfo: true,
+      infoMessage: message
+    });
+  }
+
+  closeInfo()
+  {
+    this.setState({
+      showInfo: false
+    })
+  }
+
   render() {
     //console.log("aplikacja uruchomiona");
     if(this.state.camera==="Close")
@@ -52,8 +69,13 @@ export default class App extends Component {
           <Body cameraSwitch={this.cameraSwitch.bind(this)}
             loggedSwitch={this.loggedSwitch.bind(this)}
             loginStateSwitch={this.loginStateSwitch.bind(this)}
+            showInfoMessage={this.showInfoMessage.bind(this)}
+            closeInfo={this.closeInfo.bind(this)}
+
             logged={this.state.logged}
-            loginState={this.state.loginState}/>
+            loginState={this.state.loginState}
+            showInfo={this.state.showInfo}
+            infoMessage={this.state.infoMessage}/>
         </View>
       );
     }

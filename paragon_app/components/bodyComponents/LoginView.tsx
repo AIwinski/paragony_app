@@ -4,8 +4,17 @@ import { login } from '../../api'
 
 export class LoginView extends Component {
 
-  submitAction() {
-    this.props.logUserHandle();
+  state = {
+    login: "",
+    password: "",
+  }
+
+  async submitAction() {
+    console.log(this.state.email);
+    console.log(this.state.password);
+    let response = await register(this.state.email, this.state.password);
+    console.log(response);
+    //this.props.logUserHandle();
   }
 
   render() {
