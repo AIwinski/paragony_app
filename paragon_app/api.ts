@@ -34,14 +34,17 @@ const appendTokenToRequestOptions = async (options: any) => {
 };
 
 export const login = (email: string, password: string) => {
-    return fetch(API_URL + '/users/login', { method: 'POST', body: JSON.stringify({ email, password }) }).then(response => {
+    return fetch(API_URL + '/users/login', { method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ email, password }) }).then(response => {
         return response.json();
     });
 };
 
 export const register = (email: string, password: string) => {
-    return fetch(API_URL + '/users/register', { method: 'POST', body: JSON.stringify({ email, password }) }).then(response => {
-        console.log(response.headers);
+    return fetch(API_URL + '/users/register', { method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ email, password }) }).then(response => {
         return response.json();
     });
 };
