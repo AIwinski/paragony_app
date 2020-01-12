@@ -27,32 +27,33 @@ const appendTokenToRequestOptions = async (options: any) => {
         update.headers = {
             ...update.headers,
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
         };
     }
     return update;
 };
 
 export const login = (email: string, password: string) => {
-    fetch(API_URL + '/users/login', { method: 'POST', body: JSON.stringify({ email, password }) }).then(response => {
+    return fetch(API_URL + '/users/login', { method: 'POST', body: JSON.stringify({ email, password }) }).then(response => {
         return response.json();
     });
 };
 
 export const register = (email: string, password: string) => {
-    fetch(API_URL + '/users/register', { method: 'POST', body: JSON.stringify({ email, password }) }).then(response => {
+    return fetch(API_URL + '/users/register', { method: 'POST', body: JSON.stringify({ email, password }) }).then(response => {
         console.log(response.headers);
         return response.json();
     });
 };
 
 export const getAllReceipts = async () => {
-    fetch(API_URL + '/receipts', await appendTokenToRequestOptions({ method: 'GET' })).then(response => {
+    return fetch(API_URL + '/receipts', await appendTokenToRequestOptions({ method: 'GET' })).then(response => {
         return response.json();
     });
 };
 
 export const getReceiptById = async (id: string) => {
-    fetch(API_URL + '/receipts/' + id, await appendTokenToRequestOptions({ method: 'GET' })).then(response => {
+    return fetch(API_URL + '/receipts/' + id, await appendTokenToRequestOptions({ method: 'GET' })).then(response => {
         return response.json();
     });
 };
@@ -62,7 +63,7 @@ export const addReceipt = async (title: string, description: string, imageFile: 
     fd.append('file', imageFile);
     fd.set('title', title);
     fd.set('description', description);
-    fetch(API_URL + '/receipts', await appendTokenToRequestOptions({ method: 'POST', body: fd })).then(response => {
+    return fetch(API_URL + '/receipts', await appendTokenToRequestOptions({ method: 'POST', body: fd })).then(response => {
         return response.json();
     });
 };
