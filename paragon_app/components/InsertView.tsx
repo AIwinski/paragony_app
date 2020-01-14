@@ -1,47 +1,77 @@
 import React, { Component } from 'react';
 import {ImageBackground, View, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
 import { FontAwesome, AntDesign } from '@expo/vector-icons';
+import { addReceipt } from '../api'
 
 export class InsertView extends Component
 {
     state = {
-        hideForm: false
+        hideForm: false,
+
+        title: "",
+        description: "",
     }
 
     hideForm()
     {
-        console.log("hide form");
+        this.setState({hideForm: true});
     }
 
-    uploadParagon()
+    showForm()
     {
-        console.log("upload paragon");
+        this.setState({hideForm: false});
+    }
+
+    async uploadParagon()
+    {
+        console.log(this.state.title);
+        console.log(this.state.description);
+        console.log(this.props.picture.uri);
+        let response = await addReceipt(this.state.title, this.state.description, this.props.picture.uri);
+        console.log(response);
+
     }
 
     render() {
-        return(
-            <ImageBackground source={this.props.picture} style={s.background}>
-                <View style={s.form}>
-                    <TextInput style={s.input} placeholder="category"/>
-                    <TextInput style={s.input} placeholder="title"/>
-                    <TextInput style={s.input}
-                        placeholder="description"
-                        multiline = {true}
-                        numberOfLines = {4}/>
-                    <View style={s.bottomRow}>
-                        <TouchableOpacity onPress={() => this.props.cameraSwitch("ShootPicture")}>
-                            <AntDesign name="back" style={s.iconButton}/>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.hideForm()}>
-                            <AntDesign name="picture" style={s.iconButton}/>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.uploadParagon()}>
-                            <AntDesign name="upload" style={s.iconButton}/>
-                        </TouchableOpacity>
+        if(!this.state.hideForm)
+        {
+            return(
+                <ImageBackground source={this.props.picture} style={s.background}>
+                    <View style={s.form}>
+                        <TextInput style={s.input} placeholder="title"
+                            onChangeText={(text) => this.setState({title: text})}
+                            value={this.state.title}/>
+                        <TextInput style={s.input}
+                            placeholder="description"
+                            multiline = {true}
+                            numberOfLines = {4}
+                            onChangeText={(text) => this.setState({description: text})}
+                            value={this.state.description}/>
+                        <View style={s.bottomRow}>
+                            <TouchableOpacity onPress={() => this.props.cameraSwitch("ShootPicture")}>
+                                <AntDesign name="back" style={s.iconButton}/>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => this.hideForm()}>
+                                <AntDesign name="picture" style={s.iconButton}/>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => this.uploadParagon()}>
+                                <AntDesign name="upload" style={s.iconButton}/>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                </View>
-            </ImageBackground>
-        );
+                </ImageBackground>
+            );
+        }
+        else
+        {
+            return(
+                <ImageBackground source={this.props.picture} style={s.background}>
+                    <TouchableOpacity style={{width: '100%',height: '100%'}}
+                        onPress={() => this.showForm()}>
+                    </TouchableOpacity>
+                </ImageBackground>
+            );
+        }
     }
 }
 
