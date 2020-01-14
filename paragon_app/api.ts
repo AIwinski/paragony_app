@@ -71,7 +71,11 @@ export const addReceipt = async (title: string, description: string, imageFile: 
     console.log("===========================");
     console.log(fd);
     console.log("===========================");
-    return fetch(API_URL + '/receipts', await appendTokenToRequestOptions({ method: 'POST', body: fd })).then(response => {
-        return response.json();
+    return fetch(API_URL + '/receipts',
+        await appendTokenToRequestOptions({ method: 'POST',
+            headers: {'Content-Type': 'multipart/form-data'},
+            body: fd }))
+            .then(response => {
+                return response.json();
     });
 };
