@@ -62,13 +62,15 @@ export const getReceiptById = async (id: string) => {
 };
 
 export const addReceipt = async (title: string, description: string, imageFile: any) => {
-    console.log("fd");
+    console.log("add receipt");
     const fd = new FormData();
-    console.log(fd);
+    //only append for android devices
     fd.append('file', imageFile);
-    fd.set('title', title);
-    fd.set('description', description);
+    fd.append('title', title);
+    fd.append('description', description);
+    console.log("===========================");
     console.log(fd);
+    console.log("===========================");
     return fetch(API_URL + '/receipts', await appendTokenToRequestOptions({ method: 'POST', body: fd })).then(response => {
         return response.json();
     });
