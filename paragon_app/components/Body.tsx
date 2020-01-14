@@ -33,7 +33,9 @@ export class Body extends Component {
             else if(this.props.loginState==="Login")
             {
                 return (
-                    <LoginView loginStateSwitch={this.props.loginStateSwitch.bind(this)} logUserHandle={this.logUser.bind(this)}/>
+                    <LoginView loginStateSwitch={this.props.loginStateSwitch.bind(this)}
+                    showInfoMessage={this.props.showInfoMessage.bind(this)}
+                    logUserHandle={this.logUser.bind(this)}/>
                 );
             }
             else if(this.props.loginState==="Register")
