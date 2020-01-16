@@ -76,11 +76,31 @@ export const addReceipt = async (title: string, description: string, imageFile: 
         body: fd }));
     console.log("===========================");
 
-    return fetch(API_URL + '/receipts',
-        await appendTokenToRequestOptions({ method: 'POST',
-            headers: {'Content-Type': 'multipart/form-data'},
-            body: fd }))
-            .then(response => {
-                return response.json();
-    });
+    var req = new XMLHttpRequest();
+
+    const token = await getToken();
+    req.open('POST', API_URL + '/receipts', true);
+    req.setRequestHeader("Authorization", `Bearer ${token}`);
+    req.setRequestHeader("Content-Type", "multipart/form-data");
+    req.onreadystatechange = function (aEvt) {
+        if (req.readyState == 4) {
+            if(req.status == 200)
+                console.log(req.responseText);
+            else
+                console.log("Błąd\n" + req.responseText);
+        }
+    };
+    req.send(fd);
+    return req.responseText;
+
+
+    // return fetch(API_URL + '/receipts',
+    //     await appendTokenToRequestOptions({ method: 'POST',
+    //         headers: {'Content-Type': 'multipart/form-data'},
+    //         body: fd }))
+    //         .then(response => {
+    //             return response.json();
+    //         }).catch(error => {
+    //             console.log(error)
+    // });
 };

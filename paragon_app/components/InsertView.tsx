@@ -28,9 +28,18 @@ export class InsertView extends Component
     {
         console.log(this.state.title);
         console.log(this.state.description);
-        console.log(this.props.picture.uri.replace("file://", ""));
+        console.log(this.props.picture);
+
+        const pictureUri = this.props.picture.uri;
+        const picture = {
+            name: pictureUri.substring(pictureUri.lastIndexOf('/')+1),
+            type: "image/" + pictureUri.substring(pictureUri.lastIndexOf('.')+1),
+            uri: pictureUri.replace("file://", "")
+        };
+        console.log(picture);
+
         let response = await addReceipt(this.state.title, this.state.description,
-            this.props.picture.uri.replace("file://", ""));
+            picture);
         console.log(response);
 
     }
