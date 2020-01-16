@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Button, View, TextInput } from 'react-native';
-import { login } from '../../api'
+import { login, storeToken } from '../../api'
 
 export class LoginView extends Component {
 
@@ -16,6 +16,7 @@ export class LoginView extends Component {
     console.log(response);
     if( response != null && response.user != null && response.user.email === this.state.email )
     {
+      storeToken(response.token);
       this.props.logUserHandle();
     }
     else

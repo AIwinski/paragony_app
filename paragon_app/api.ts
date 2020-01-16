@@ -3,7 +3,7 @@ import { AsyncStorage } from 'react-native';;
 
 const API_URL = 'https://stormy-shelf-85819.herokuapp.com';
 
-const storeToken = async (token: string) => {
+export const storeToken = async (token: string) => {
     try {
         await AsyncStorage.setItem('@auth_token', token);
     } catch (e) {
@@ -27,7 +27,7 @@ const appendTokenToRequestOptions = async (options: any) => {
         update.headers = {
             ...update.headers,
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
+            //"Content-Type": "application/json",
         };
     }
     return update;
@@ -68,9 +68,14 @@ export const addReceipt = async (title: string, description: string, imageFile: 
     fd.append('file', imageFile);
     fd.append('title', title);
     fd.append('description', description);
+
+    //show whats send
     console.log("===========================");
-    console.log(fd);
+    console.log(await appendTokenToRequestOptions({ method: 'POST',
+        headers: {'Content-Type': 'multipart/form-data'},
+        body: fd }));
     console.log("===========================");
+
     return fetch(API_URL + '/receipts',
         await appendTokenToRequestOptions({ method: 'POST',
             headers: {'Content-Type': 'multipart/form-data'},

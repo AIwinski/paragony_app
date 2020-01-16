@@ -5,6 +5,8 @@ import { addReceipt } from '../api'
 
 export class InsertView extends Component
 {
+    //try CAMERA_ROLL permission
+
     state = {
         hideForm: false,
 
@@ -26,8 +28,9 @@ export class InsertView extends Component
     {
         console.log(this.state.title);
         console.log(this.state.description);
-        console.log(this.props.picture.uri);
-        let response = await addReceipt(this.state.title, this.state.description, this.props.picture.uri);
+        console.log(this.props.picture.uri.replace("file://", ""));
+        let response = await addReceipt(this.state.title, this.state.description,
+            this.props.picture.uri.replace("file://", ""));
         console.log(response);
 
     }

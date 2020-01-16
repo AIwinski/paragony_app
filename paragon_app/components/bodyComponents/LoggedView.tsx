@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, View } from 'react-native';
 import { Camera } from 'expo-camera';
+import * as Permissions from 'expo-permissions';
 
 export class LoggedView extends Component {
     addParagon() {
@@ -11,8 +12,11 @@ export class LoggedView extends Component {
     async componentDidMount()
     {
         console.log("mounted logged view");
-        const{status}  = await Camera.requestPermissionsAsync();
-        if (status === 'granted') {
+        const{ status: cameraStatus }  = await Camera.requestPermissionsAsync();
+        const{ status: transferStatus } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        console.log( cameraStatus );
+        console.log( transferStatus );
+        if (cameraStatus === 'granted' && transferStatus === 'granted') {
             console.log("succes");
         } else {
             console.log("no permission");

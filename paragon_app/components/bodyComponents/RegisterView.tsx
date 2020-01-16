@@ -58,10 +58,11 @@ export class RegisterView extends Component {
     console.log(this.state.email);
     console.log(this.state.password);
     let response = await register(this.state.email, this.state.password);
+    console.log(response);
     if( response != null && response.user != null &&
         response.user.email != null && response.user.email === this.state.email )
     {
-      this.props.logUserHandle();
+      this.props.loginStateSwitch("Login");
       this.props.showInfoMessage("Succesfully registered");
     }
     else
