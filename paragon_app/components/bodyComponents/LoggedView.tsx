@@ -4,7 +4,7 @@ import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
 import { ParagonComponent } from './loggedViewComponents/ParagonComponent';
 import { getAllReceipts, API_URL } from '../../api'
-import { ReceiptList } from './ReceiptList';
+import { ReceiptList } from '../ReceiptList';
 
 export class LoggedView extends Component {
     testImageUri = "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg";
@@ -31,19 +31,19 @@ export class LoggedView extends Component {
             console.log("no permission");
         }
 
-        let response = await getAllReceipts();
-        console.log('============GET_ALL==============');
-        console.log(response);
-        console.log('=================================')
-        if(response != null && response.receipts != null)
-        {
-            let paragons_a = [];
-            response.receipts.forEach((p)=>{
-                paragons_a.push(<ParagonComponent uri={API_URL + "/" + p.urlPath}/>);
-                console.log(API_URL + "/" + p.urlPath);
-            });
-            this.setState({paragons: paragons_a});
-        }
+        // let response = await getAllReceipts();
+        // console.log('============GET_ALL==============');
+        // console.log(response);
+        // console.log('=================================')
+        // if(response != null && response.receipts != null)
+        // {
+        //     let paragons_a = [];
+        //     response.receipts.forEach((p)=>{
+        //         paragons_a.push(<ParagonComponent uri={API_URL + "/" + p.urlPath}/>);
+        //         console.log(API_URL + "/" + p.urlPath);
+        //     });
+        //     this.setState({paragons: paragons_a});
+        // }
     }
 
     getTestParagons()

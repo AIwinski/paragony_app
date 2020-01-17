@@ -1,7 +1,7 @@
-import { getAllReceipts } from '../../api'
+import { getAllReceipts } from '../api'
 import React, { Component } from 'react';
 import { View, FlatList} from 'react-native';
-import { Receipt } from './Receipt';
+import { Receipt } from './Receipts';
 
 export class ReceiptList extends Component {
 
@@ -10,7 +10,8 @@ export class ReceiptList extends Component {
     }
     componentDidMount(): void {
         getAllReceipts().then((res => {
-            this.setState({receipts: res.data.receipts});
+            console.log(res);
+            this.setState({receipts: res.receipts});
         }));
     }
 

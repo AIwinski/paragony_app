@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { API_URL } from '../../api'
+import { API_URL } from '../api'
 import { StyleSheet, View, Text, Image } from 'react-native';
 
 export class Receipt extends Component {
 
     render() {
-        const imageUrl = API_URL + this.props.imageUrl;
+        const imageUrl = API_URL + "/" + this.props.imageUrl;
+        console.log(imageUrl);
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>{this.props.title}</Text>
