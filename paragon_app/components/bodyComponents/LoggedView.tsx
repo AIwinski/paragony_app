@@ -4,6 +4,7 @@ import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
 import { ParagonComponent } from './loggedViewComponents/ParagonComponent';
 import { getAllReceipts, API_URL } from '../../api'
+import { ReceiptList } from './ReceiptList';
 
 export class LoggedView extends Component {
     testImageUri = "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg";
@@ -57,7 +58,7 @@ export class LoggedView extends Component {
         return (
             <ScrollView style={s.bodyScrollView}>
                 <Button title="+" onPress={()=>this.addParagon()}/>
-                {this.state.paragons}
+                <ReceiptList></ReceiptList>
             </ScrollView>
         );
     }
