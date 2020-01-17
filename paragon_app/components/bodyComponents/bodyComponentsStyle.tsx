@@ -13,6 +13,14 @@ module.exports = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10
     },
+    bodyScrollView:{
+        borderRadius: 20,
+        paddingTop: 50,
+        paddingBottom: 10,
+        paddingLeft: 10,
+        paddingRight: 10,
+        marginBottom: 30,
+    },
     buttomView: {
         paddingTop: 5,
         paddingBottom: 5,

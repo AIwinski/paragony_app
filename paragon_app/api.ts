@@ -1,7 +1,7 @@
 
 import { AsyncStorage } from 'react-native';;
 
-const API_URL = 'https://stormy-shelf-85819.herokuapp.com';
+export const API_URL = 'https://stormy-shelf-85819.herokuapp.com';
 
 export const storeToken = async (token: string) => {
     try {
@@ -62,45 +62,22 @@ export const getReceiptById = async (id: string) => {
 };
 
 export const addReceipt = async (title: string, description: string, imageFile: any) => {
-    console.log("add receipt");
+    //console.log("add receipt");
     const fd = new FormData();
     //only append for android devices
-    fd.append('file', imageFile);
+    fd.append('image', imageFile);
     fd.append('title', title);
     fd.append('description', description);
 
-    //show whats send
-    console.log("===========================");
-    console.log(await appendTokenToRequestOptions({ method: 'POST',
-        headers: {'Content-Type': 'multipart/form-data'},
-        body: fd }));
-    console.log("===========================");
-
+    //no fetch when dealing with object in formData in expo
     var req = new XMLHttpRequest();
 
     const token = await getToken();
     req.open('POST', API_URL + '/receipts', true);
     req.setRequestHeader("Authorization", `Bearer ${token}`);
     req.setRequestHeader("Content-Type", "multipart/form-data");
-    req.onreadystatechange = function (aEvt) {
-        if (req.readyState == 4) {
-            if(req.status == 200)
-                console.log(req.responseText);
-            else
-                console.log("Błąd\n" + req.responseText);
-        }
-    };
     req.send(fd);
+    console.log("ins res:" + req.response);
+    console.log("ins res:" + req.status);
     return req.responseText;
-
-
-    // return fetch(API_URL + '/receipts',
-    //     await appendTokenToRequestOptions({ method: 'POST',
-    //         headers: {'Content-Type': 'multipart/form-data'},
-    //         body: fd }))
-    //         .then(response => {
-    //             return response.json();
-    //         }).catch(error => {
-    //             console.log(error)
-    // });
 };

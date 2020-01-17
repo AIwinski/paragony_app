@@ -10,9 +10,8 @@ export class LoginView extends Component {
   }
 
   async submitAction() {
-    console.log(this.state.email);
-    console.log(this.state.password);
     let response = await login(this.state.email, this.state.password);
+    console.log("login response");
     console.log(response);
     if( response != null && response.user != null && response.user.email === this.state.email )
     {

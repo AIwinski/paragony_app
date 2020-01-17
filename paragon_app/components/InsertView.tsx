@@ -5,8 +5,6 @@ import { addReceipt } from '../api'
 
 export class InsertView extends Component
 {
-    //try CAMERA_ROLL permission
-
     state = {
         hideForm: false,
 
@@ -26,22 +24,20 @@ export class InsertView extends Component
 
     async uploadParagon()
     {
-        console.log(this.state.title);
-        console.log(this.state.description);
-        console.log(this.props.picture);
-
         const pictureUri = this.props.picture.uri;
         const picture = {
             name: pictureUri.substring(pictureUri.lastIndexOf('/')+1),
             type: "image/" + pictureUri.substring(pictureUri.lastIndexOf('.')+1),
-            uri: pictureUri.replace("file://", "")
+            uri: pictureUri
         };
-        console.log(picture);
+        //console.log(picture);
 
         let response = await addReceipt(this.state.title, this.state.description,
             picture);
+        console.log("=======response======");
         console.log(response);
-
+        console.log("====================");
+        this.props.cameraSwitch("Close");
     }
 
     render() {
